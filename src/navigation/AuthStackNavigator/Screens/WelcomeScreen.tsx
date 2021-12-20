@@ -1,7 +1,6 @@
 import React from 'react';
 import {Image, StyleSheet, View} from 'react-native';
-import {ButtonOutlined} from '~components/Atom/ButtonOutlined';
-import {ButtonSolid} from '~components/Atom/ButtonSolid';
+import {ButtonStyled} from '~components/Atom';
 import {AuthNavProps} from '../AuthParamList';
 
 export default function WelcomeScreen({}: AuthNavProps<'WelcomeScreen'>) {
@@ -12,8 +11,12 @@ export default function WelcomeScreen({}: AuthNavProps<'WelcomeScreen'>) {
         source={require('src/assets/keleya-challenge-assets/first-intro-image.png')}
         style={styles.initalBg}
       />
-      <ButtonSolid text="Get started" testID="getStartedButton" />
-      <ButtonOutlined text="Or login" testID="loginButton" />
+      <ButtonStyled
+        variant="solid"
+        text="Get started"
+        testID="getStartedButton"
+      />
+      <ButtonStyled variant="outlined" text="Or login" testID="loginButton" />
     </View>
   );
 }
