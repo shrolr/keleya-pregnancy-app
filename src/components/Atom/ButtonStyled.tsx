@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {Dimensions, StyleSheet, Text, View} from 'react-native';
 import {AppColors} from '~constants';
 
 interface IButtonStyled {
@@ -28,10 +28,11 @@ const containerStyles = StyleSheet.create({
     alignSelf: 'center',
   },
   solid: {
-    height: 50,
-    marginHorizontal: 24,
     marginVertical: 4,
-    borderRadius: 8,
+    borderRadius: 6,
+    width: Dimensions.get('screen').width * 0.8,
+    alignSelf: 'center',
+    paddingVertical: 10,
     justifyContent: 'center',
     backgroundColor: AppColors.PALE_TEAL,
   },
@@ -39,12 +40,16 @@ const containerStyles = StyleSheet.create({
 
 const textStyles = StyleSheet.create({
   outlined: {
-    fontSize: 16,
-    color: AppColors.WARM_GREY,
+    fontSize: 18,
+    color: AppColors.GREYISH_BROWN,
     textAlign: 'center',
+    fontWeight: '700',
+    letterSpacing: 0.7,
   },
   solid: {
-    fontSize: 24,
+    fontSize: 20,
+    letterSpacing: 0.7,
+    fontWeight: '700',
     color: AppColors.WHITE,
     textAlign: 'center',
   },
