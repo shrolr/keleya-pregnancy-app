@@ -1,1 +1,1 @@
-export * from './AppColors';
+export * from './AppTheme';

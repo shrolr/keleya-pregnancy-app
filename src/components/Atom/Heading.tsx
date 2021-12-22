@@ -1,6 +1,6 @@
 import React from 'react';
-import {Dimensions, StyleSheet, Text} from 'react-native';
-import {AppColors} from '~constants';
+import {Dimensions, StyleSheet, Text, View} from 'react-native';
+import {AppTheme} from '~constants';
 
 interface IHeading {
   text: string;
@@ -8,21 +8,22 @@ interface IHeading {
 
 export const Heading: React.FC<IHeading> = ({text}) => {
   return (
-    <Text ellipsizeMode="tail" numberOfLines={2} style={styles.text}>
-      {text}
-    </Text>
+    <View style={styles.container}>
+      <Text ellipsizeMode="tail" numberOfLines={2} style={styles.text}>
+        {text}
+      </Text>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  text: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    color: AppColors.GREYISH_BROWN,
-    fontSize: 18,
-    fontWeight: '400',
-    letterSpacing: 0.5,
-    textAlign: 'center',
+  container: {
     width: Dimensions.get('screen').width * 0.7,
+  },
+  text: {
+    fontWeight: '500',
+    textAlign: 'center',
+    color: AppTheme.colors.GREYISH_BROWN,
+    ...AppTheme.textVariants.header,
   },
 });
