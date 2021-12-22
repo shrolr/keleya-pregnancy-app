@@ -1,24 +1,30 @@
 import React from 'react';
-import {Dimensions, StyleSheet, Text, View} from 'react-native';
+import {
+  Dimensions,
+  GestureResponderEvent,
+  Pressable,
+  StyleSheet,
+  Text,
+} from 'react-native';
 import {AppTheme} from '~constants';
 
 interface IButtonStyled {
   text: string;
   testID: string;
   variant: 'outlined' | 'solid';
+  onPress?: ((event: GestureResponderEvent) => void) | null | undefined;
 }
 
 export const ButtonStyled: React.FC<IButtonStyled> = ({
   text,
   variant,
   testID,
-}) => {
-  return (
-    <View testID={testID} style={containerStyles[variant]}>
-      <Text style={textStyles[variant]}>{text}</Text>
-    </View>
-  );
-};
+  onPress,
+}) => (
+  <Pressable onPress={onPress} testID={testID} style={containerStyles[variant]}>
+    <Text style={textStyles[variant]}>{text}</Text>
+  </Pressable>
+);
 
 const containerStyles = StyleSheet.create({
   outlined: {

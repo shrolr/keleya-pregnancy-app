@@ -4,8 +4,13 @@ import {ButtonStyled, Dots, KeleyeBanner} from '~components/Atom';
 import {AppTheme} from '~constants';
 import {AuthNavProps} from '../AuthParamList';
 
-export default function WelcomeScreen({}: AuthNavProps<'WelcomeScreen'>) {
+export default function WelcomeScreen({
+  navigation,
+}: AuthNavProps<'WelcomeScreen'>) {
   const backgroundImage = require('src/assets/keleya-challenge-assets/first-intro-image.png');
+  const onGetStartedButtonPress = () => {
+    navigation.navigate('SignUpScreen');
+  };
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -15,6 +20,7 @@ export default function WelcomeScreen({}: AuthNavProps<'WelcomeScreen'>) {
         <KeleyeBanner />
       </ImageBackground>
       <ButtonStyled
+        onPress={onGetStartedButtonPress}
         variant="solid"
         text="Get started"
         testID="getStartedButton"

@@ -4,21 +4,21 @@ import {AppTheme} from '~constants';
 
 interface IHeading {
   text: string;
+  testID?: string;
 }
 
-export const Heading: React.FC<IHeading> = ({text}) => {
-  return (
-    <View style={styles.container}>
-      <Text ellipsizeMode="tail" numberOfLines={2} style={styles.text}>
-        {text}
-      </Text>
-    </View>
-  );
-};
+export const Heading: React.FC<IHeading> = ({text, testID}) => (
+  <View testID={testID} style={styles.container}>
+    <Text ellipsizeMode="tail" numberOfLines={2} style={styles.text}>
+      {text}
+    </Text>
+  </View>
+);
 
 const styles = StyleSheet.create({
   container: {
     width: Dimensions.get('screen').width * 0.7,
+    alignSelf: 'center',
   },
   text: {
     fontWeight: '500',
