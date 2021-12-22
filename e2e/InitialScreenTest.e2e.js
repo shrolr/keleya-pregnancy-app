@@ -1,12 +1,11 @@
 /* eslint-env detox/detox, jest */
 
-describe('Example', () => {
+describe('Initial Screen Test', () => {
   beforeAll(async () => {
     await device.launchApp();
   });
-
-  beforeEach(async () => {
-    await device.reloadReactNative();
+  afterAll(async () => {
+    await device.takeScreenshot('Initial Screen');
   });
 
   it('should have welcome screen', async () => {

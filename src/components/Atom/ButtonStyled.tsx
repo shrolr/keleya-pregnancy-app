@@ -1,6 +1,6 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import {AppColors} from '~constants';
+import {Dimensions, StyleSheet, Text, View} from 'react-native';
+import {AppTheme} from '~constants';
 
 interface IButtonStyled {
   text: string;
@@ -22,30 +22,33 @@ export const ButtonStyled: React.FC<IButtonStyled> = ({
 
 const containerStyles = StyleSheet.create({
   outlined: {
-    marginVertical: 4,
-    paddingVertical: 4,
-    paddingHorizontal: 12,
+    marginVertical: AppTheme.spacing.xs,
+    paddingVertical: AppTheme.spacing.xs,
+    paddingHorizontal: AppTheme.spacing.m,
     alignSelf: 'center',
   },
   solid: {
-    height: 50,
-    marginHorizontal: 24,
-    marginVertical: 4,
-    borderRadius: 8,
+    marginVertical: AppTheme.spacing.xs,
+    borderRadius: 6,
+    width: Dimensions.get('screen').width * 0.8,
+    alignSelf: 'center',
+    paddingVertical: AppTheme.spacing.s,
     justifyContent: 'center',
-    backgroundColor: AppColors.PALE_TEAL,
+    backgroundColor: AppTheme.colors.PALE_TEAL,
   },
 });
 
 const textStyles = StyleSheet.create({
   outlined: {
-    fontSize: 16,
-    color: AppColors.WARM_GREY,
+    color: AppTheme.colors.GREYISH_BROWN,
     textAlign: 'center',
+    fontWeight: '700',
+    ...AppTheme.textVariants.header,
   },
   solid: {
-    fontSize: 24,
-    color: AppColors.WHITE,
+    fontWeight: '700',
+    color: AppTheme.colors.WHITE,
     textAlign: 'center',
+    ...AppTheme.textVariants.header,
   },
 });
