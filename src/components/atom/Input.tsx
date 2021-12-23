@@ -8,6 +8,7 @@ interface IInput {
   keyboardType?: KeyboardTypeOptions;
   secureTextEntry?: boolean;
   rightIcon?: React.ReactNode;
+  onChangeText?: (text: string) => void;
 }
 
 export const Input: React.FC<IInput> = ({
@@ -16,9 +17,11 @@ export const Input: React.FC<IInput> = ({
   testID,
   secureTextEntry,
   rightIcon,
+  onChangeText,
 }) => (
   <View style={styles.container}>
     <TextInput
+      onChangeText={onChangeText}
       autoCapitalize="none"
       secureTextEntry={secureTextEntry}
       testID={testID}
