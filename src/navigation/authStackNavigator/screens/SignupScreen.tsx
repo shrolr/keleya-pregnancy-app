@@ -1,6 +1,6 @@
 import React from 'react';
 import {Dimensions, Image, StyleSheet, View} from 'react-native';
-import {Heading} from '~components/Atom';
+import {Heading, Input} from '~components/atom';
 import {AppTheme} from '~constants';
 import {AuthNavProps} from '../AuthParamList';
 
@@ -14,7 +14,11 @@ export default function SignUpScreen({}: AuthNavProps<'SignUpScreen'>) {
         source={backgroundImage}
         style={styles.headerImage}
       />
-      <Heading text="Add your details below to set up an account" />
+      <Heading
+        testID="getStartedTitle"
+        text="Add your details below to set up an account"
+      />
+      <Input testID="emailInput" placeholder="example@gmail.com" />
     </View>
   );
 }

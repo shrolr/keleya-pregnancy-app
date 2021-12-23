@@ -15,9 +15,10 @@ describe('Signup Screen Test', () => {
       .withTimeout(2000);
   });
   it('should have title', async () => {
-    await element(by.id('getStartedTitle')).toBeVisible();
+    await expect(element(by.id('getStartedTitle'))).toBeVisible();
   });
   it('should have email input', async () => {
-    await element(by.id('emailInput')).toBeVisible();
+    await expect(element(by.id('getStartedTitle'))).toBeVisible();
+    await element(by.id('emailInput')).typeText('123456');
   });
 });

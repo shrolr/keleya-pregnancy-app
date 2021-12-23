@@ -1,6 +1,6 @@
 import React from 'react';
 import {Dimensions, ImageBackground, StyleSheet, View} from 'react-native';
-import {ButtonStyled, Dots, KeleyeBanner} from '~components/Atom';
+import {ButtonStyled, Dots, KeleyeBanner} from '~components/atom';
 import {AppTheme} from '~constants';
 import {AuthNavProps} from '../AuthParamList';
 

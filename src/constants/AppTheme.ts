@@ -21,6 +21,9 @@ export const AppTheme = {
       fontSize: 18,
       letterSpacing: 0.5,
     },
+    body: {
+      fontSize: 14,
+    },
     button: {
       fontSize: 16,
       letterSpacing: 0.7,

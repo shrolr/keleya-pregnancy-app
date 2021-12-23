@@ -10,7 +10,7 @@
 import 'react-native-gesture-handler';
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import {AuthStack} from './src/navigation/AuthStackNavigator/AuthStack';
+import {AuthStack} from './src/navigation/authStackNavigator/AuthStack';
 
 const App = () => {
   return (

@@ -1,8 +1,8 @@
 import React from 'react';
 import {AuthParamList} from './AuthParamList';
-import WelcomeScreen from './Screens/WelcomeScreen';
+import WelcomeScreen from './screens/WelcomeScreen';
 import {createStackNavigator} from '@react-navigation/stack';
-import SignUpScreen from './Screens/SignupScreen';
+import SignUpScreen from './screens/SignupScreen';
 
 interface AuthStackProps {}
 
