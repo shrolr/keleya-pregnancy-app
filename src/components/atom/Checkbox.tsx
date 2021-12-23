@@ -18,25 +18,25 @@ export const Checkbox: React.FC<ICheckbox> = ({onPress, testID, checked}) => (
 
 const styles = StyleSheet.create({
   container: {
-    padding: AppTheme.spacing.s,
-    margin: -AppTheme.spacing.s,
     marginVertical: AppTheme.spacing.s,
     alignSelf: 'flex-start',
   },
   checkbox: {
     borderWidth: 1.2,
-    height: 15,
-    width: 15,
+    borderRadius: 3,
+    height: 20,
+    width: 20,
     backgroundColor: AppTheme.colors.WHITE,
     borderColor: AppTheme.colors.PALE_TEAL,
   },
   checkboxChecked: {
-    height: 15,
-    width: 15,
+    borderRadius: 3,
+    height: 20,
+    width: 20,
     backgroundColor: AppTheme.colors.PALE_TEAL,
   },
   checkedImage: {
-    width: 15,
-    height: 15,
+    width: 20,
+    height: 20,
   },
 });

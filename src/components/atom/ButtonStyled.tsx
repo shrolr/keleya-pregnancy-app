@@ -6,6 +6,7 @@ interface IButtonStyled {
   text: string;
   testID: string;
   variant: 'outlined' | 'solid';
+  disabled?: boolean;
   onPress?: ((event: GestureResponderEvent) => void) | null | undefined;
 }
 
@@ -14,13 +15,25 @@ export const ButtonStyled: React.FC<IButtonStyled> = ({
   variant,
   testID,
   onPress,
+  disabled,
 }) => (
-  <Pressable onPress={onPress} testID={testID} style={containerStyles[variant]}>
+  <Pressable
+    disabled={disabled}
+    onPress={onPress}
+    testID={testID}
+    style={
+      disabled
+        ? [containerStyles[variant], containerStyles.disabled]
+        : containerStyles[variant]
+    }>
     <Text style={textStyles[variant]}>{text}</Text>
   </Pressable>
 );
 
 const containerStyles = StyleSheet.create({
+  disabled: {
+    backgroundColor: AppTheme.colors.WARM_GREY,
+  },
   outlined: {
     marginVertical: AppTheme.spacing.xs,
     paddingVertical: AppTheme.spacing.xs,

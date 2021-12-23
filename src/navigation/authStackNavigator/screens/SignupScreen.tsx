@@ -1,6 +1,7 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Dimensions, Image, StyleSheet, Text, View} from 'react-native';
 import {
+  ButtonStyled,
   Checkbox,
   Container,
   Heading,
@@ -10,19 +11,36 @@ import {
 import {AppTheme} from '~constants';
 import {AuthNavProps} from '../AuthParamList';
 
+const backgroundImage = require('src/assets/keleya-challenge-assets/authentication-background-image.jpg');
 export default function SignUpScreen({}: AuthNavProps<'SignUpScreen'>) {
-  const backgroundImage = require('src/assets/keleya-challenge-assets/authentication-background-image.jpg');
+  const [createAccountButtonDisabled, setcreateAccountButtonDisabled] =
+    useState(true);
+  const [email, setemail] = useState('');
   const [privacyPolicyCheckboxChecked, setprivacyPolicyCheckboxChecked] =
     useState(false);
+  const [isTextEntrySecured, setisTextEntrySecured] = useState(true);
 
+  const [
+    termsAndConditionsCheckboxChecked,
+    settermsAndConditionsCheckboxChecked,
+  ] = useState(false);
   const onPrivacyPolicyCheckboxChanged = () => {
     setprivacyPolicyCheckboxChecked(!privacyPolicyCheckboxChecked);
   };
-  const [isTextEntrySecured, setisTextEntrySecured] = useState(true);
-
+  const onTermsAndConditionsCheckboxChanged = () => {
+    settermsAndConditionsCheckboxChecked(!termsAndConditionsCheckboxChecked);
+  };
   const onSecureTextEntryChanged = () => {
     setisTextEntrySecured(!isTextEntrySecured);
   };
+  const onChangeEmailInput = (text: string) => {
+    setemail(text);
+  };
+  useEffect(() => {
+    setcreateAccountButtonDisabled(
+      privacyPolicyCheckboxChecked && termsAndConditionsCheckboxChecked,
+    );
+  }, [privacyPolicyCheckboxChecked, termsAndConditionsCheckboxChecked, email]);
 
   return (
     <View style={styles.container}>
@@ -40,6 +58,7 @@ export default function SignUpScreen({}: AuthNavProps<'SignUpScreen'>) {
           keyboardType="email-address"
           testID="emailInput"
           placeholder="example@gmail.com"
+          onChangeText={onChangeEmailInput}
         />
         <Input
           secureTextEntry={isTextEntrySecured}
@@ -63,6 +82,28 @@ export default function SignUpScreen({}: AuthNavProps<'SignUpScreen'>) {
             <Text style={styles.checkboxStrongLabel}> privacy policy</Text>
           </Text>
         </View>
+        <View style={styles.checkboxContainer}>
+          <Checkbox
+            onPress={onTermsAndConditionsCheckboxChanged}
+            checked={termsAndConditionsCheckboxChecked}
+            testID="termsAndConditionsCheckbox"
+          />
+          <Text style={styles.checkboxLabel}>
+            I accept the
+            <Text style={styles.checkboxStrongLabel}>
+              {' '}
+              {'terms & conditions '}
+            </Text>
+            and
+            <Text style={styles.checkboxStrongLabel}> Keleya`s advice</Text>
+          </Text>
+        </View>
+        <ButtonStyled
+          testID="createAccountButton"
+          variant="solid"
+          text="Create Account"
+          disabled={createAccountButtonDisabled}
+        />
       </Container>
     </View>
   );
@@ -78,7 +119,7 @@ const styles = StyleSheet.create({
     width: Dimensions.get('screen').width,
   },
   checkboxContainer: {
-    paddingVertical: AppTheme.spacing.xs,
+    marginTop: AppTheme.spacing.s,
     flexDirection: 'row',
     alignItems: 'center',
   },
