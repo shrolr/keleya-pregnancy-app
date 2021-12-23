@@ -42,6 +42,7 @@ const styles = StyleSheet.create({
     borderBottomColor: AppTheme.colors.GREYISH_BROWN,
   },
   textInput: {
+    fontWeight: '700',
     height: 40,
     flex: 1,
     paddingHorizontal: AppTheme.spacing.l,

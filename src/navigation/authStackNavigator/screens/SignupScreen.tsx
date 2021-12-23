@@ -1,6 +1,17 @@
 import React, {useEffect, useState} from 'react';
-import {Dimensions, Image, StyleSheet, Text, View} from 'react-native';
 import {
+  Dimensions,
+  Image,
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
+  StyleSheet,
+  Text,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
+import {
+  ArrowBackButton,
   ButtonStyled,
   Checkbox,
   Container,
@@ -9,13 +20,19 @@ import {
   SecureTextEntryIcon,
 } from '~components/atom';
 import {AppTheme} from '~constants';
+import {EmailValidator} from '~utils';
 import {AuthNavProps} from '../AuthParamList';
 
 const backgroundImage = require('src/assets/keleya-challenge-assets/authentication-background-image.jpg');
-export default function SignUpScreen({}: AuthNavProps<'SignUpScreen'>) {
-  const [createAccountButtonDisabled, setcreateAccountButtonDisabled] =
+export default function SignUpScreen({
+  navigation,
+}: AuthNavProps<'SignUpScreen'>) {
+  const [createAccountButtonEnabled, setcreateAccountButtonEnabled] =
     useState(true);
   const [email, setemail] = useState('');
+  const [password, setpassword] = useState('');
+
+  const [emailInputError, setemailInputError] = useState(false);
   const [privacyPolicyCheckboxChecked, setprivacyPolicyCheckboxChecked] =
     useState(false);
   const [isTextEntrySecured, setisTextEntrySecured] = useState(true);
@@ -33,90 +50,135 @@ export default function SignUpScreen({}: AuthNavProps<'SignUpScreen'>) {
   const onSecureTextEntryChanged = () => {
     setisTextEntrySecured(!isTextEntrySecured);
   };
-  const onChangeEmailInput = (text: string) => {
-    setemail(text);
+  const onChangeEmailInput = (emailText: string) => {
+    if (!EmailValidator(emailText)) {
+      setemailInputError(true);
+    } else {
+      setemailInputError(false);
+    }
+    setemail(emailText);
+  };
+  const onChangePasswordInput = (passwordText: string) => {
+    setpassword(passwordText);
+  };
+  const onArrowBackButtonPressed = () => {
+    navigation.goBack();
   };
   useEffect(() => {
-    setcreateAccountButtonDisabled(
-      privacyPolicyCheckboxChecked && termsAndConditionsCheckboxChecked,
+    setcreateAccountButtonEnabled(
+      privacyPolicyCheckboxChecked &&
+        termsAndConditionsCheckboxChecked &&
+        email.length > 0 &&
+        !emailInputError &&
+        password.length > 0,
     );
-  }, [privacyPolicyCheckboxChecked, termsAndConditionsCheckboxChecked, email]);
+  }, [
+    privacyPolicyCheckboxChecked,
+    termsAndConditionsCheckboxChecked,
+    emailInputError,
+    password,
+    email,
+  ]);
 
   return (
-    <View style={styles.container}>
-      <Image
-        testID="headerImage"
-        source={backgroundImage}
-        style={styles.headerImage}
-      />
-      <Container>
-        <Heading
-          testID="getStartedTitle"
-          text="Add your details below to set up an account"
-        />
-        <Input
-          keyboardType="email-address"
-          testID="emailInput"
-          placeholder="example@gmail.com"
-          onChangeText={onChangeEmailInput}
-        />
-        <Input
-          secureTextEntry={isTextEntrySecured}
-          testID="passwordInput"
-          placeholder="Enter a password"
-          rightIcon={
-            <SecureTextEntryIcon
-              checked={isTextEntrySecured}
-              onPress={onSecureTextEntryChanged}
+    <KeyboardAvoidingView
+      enabled={false}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      style={styles.keyboardWrapper}>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={styles.wrapper}>
+          <ArrowBackButton onPress={onArrowBackButtonPressed} />
+          <Image
+            resizeMode="cover"
+            testID="headerImage"
+            source={backgroundImage}
+            style={styles.headerImage}
+          />
+          <Container style={styles.container}>
+            <Heading
+              testID="getStartedTitle"
+              text="Add your details below to set up an account"
             />
-          }
-        />
-        <View style={styles.checkboxContainer}>
-          <Checkbox
-            onPress={onPrivacyPolicyCheckboxChanged}
-            checked={privacyPolicyCheckboxChecked}
-            testID="privacyPolicyCheckbox"
-          />
-          <Text style={styles.checkboxLabel}>
-            I`ve read the
-            <Text style={styles.checkboxStrongLabel}> privacy policy</Text>
-          </Text>
+            <Input
+              keyboardType="email-address"
+              testID="emailInput"
+              placeholder="example@gmail.com"
+              onChangeText={onChangeEmailInput}
+            />
+            {email.length > 0 && emailInputError && (
+              <Text style={styles.wrongEmailLabel}>
+                Please enter a valid email address
+              </Text>
+            )}
+            <Input
+              secureTextEntry={isTextEntrySecured}
+              testID="passwordInput"
+              placeholder="Enter a password"
+              onChangeText={onChangePasswordInput}
+              rightIcon={
+                <SecureTextEntryIcon
+                  checked={isTextEntrySecured}
+                  onPress={onSecureTextEntryChanged}
+                />
+              }
+            />
+            <View style={styles.checkboxContainer}>
+              <Checkbox
+                onPress={onPrivacyPolicyCheckboxChanged}
+                checked={privacyPolicyCheckboxChecked}
+                testID="privacyPolicyCheckbox"
+              />
+              <Text style={styles.checkboxLabel}>
+                I`ve read the
+                <Text style={styles.checkboxStrongLabel}> privacy policy</Text>
+              </Text>
+            </View>
+            <View style={styles.checkboxContainer}>
+              <Checkbox
+                onPress={onTermsAndConditionsCheckboxChanged}
+                checked={termsAndConditionsCheckboxChecked}
+                testID="termsAndConditionsCheckbox"
+              />
+              <Text style={styles.checkboxLabel}>
+                I accept the
+                <Text style={styles.checkboxStrongLabel}>
+                  {' '}
+                  {'terms & conditions '}
+                </Text>
+                and
+                <Text style={styles.checkboxStrongLabel}> Keleya`s advice</Text>
+              </Text>
+            </View>
+            <View style={styles.createAccountContainer}>
+              <ButtonStyled
+                testID="createAccountButton"
+                variant="solid"
+                text="Create Account"
+                disabled={!createAccountButtonEnabled}
+              />
+            </View>
+          </Container>
         </View>
-        <View style={styles.checkboxContainer}>
-          <Checkbox
-            onPress={onTermsAndConditionsCheckboxChanged}
-            checked={termsAndConditionsCheckboxChecked}
-            testID="termsAndConditionsCheckbox"
-          />
-          <Text style={styles.checkboxLabel}>
-            I accept the
-            <Text style={styles.checkboxStrongLabel}>
-              {' '}
-              {'terms & conditions '}
-            </Text>
-            and
-            <Text style={styles.checkboxStrongLabel}> Keleya`s advice</Text>
-          </Text>
-        </View>
-        <ButtonStyled
-          testID="createAccountButton"
-          variant="solid"
-          text="Create Account"
-          disabled={createAccountButtonDisabled}
-        />
-      </Container>
-    </View>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  wrapper: {
+    paddingBottom: AppTheme.spacing.l,
     flex: 1,
     backgroundColor: AppTheme.colors.WHITE,
   },
+  container: {
+    flex: 1.7,
+  },
+  keyboardWrapper: {
+    flexGrow: 1,
+  },
   headerImage: {
-    marginBottom: -AppTheme.spacing.xl,
-    width: Dimensions.get('screen').width,
+    flex: 1,
+    width: Dimensions.get('window').width,
   },
   checkboxContainer: {
     marginTop: AppTheme.spacing.s,
@@ -127,8 +189,18 @@ const styles = StyleSheet.create({
     paddingLeft: AppTheme.spacing.s,
     ...AppTheme.textVariants.body,
   },
+  wrongEmailLabel: {
+    color: AppTheme.colors.DANGER,
+    padding: AppTheme.spacing.s,
+    ...AppTheme.textVariants.info,
+  },
   checkboxStrongLabel: {
     fontWeight: 'bold',
     ...AppTheme.textVariants.body,
+  },
+  createAccountContainer: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    marginTop: 30,
   },
 });

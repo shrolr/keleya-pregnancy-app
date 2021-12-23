@@ -16,6 +16,7 @@ export const Checkbox: React.FC<ICheckbox> = ({onPress, testID, checked}) => (
   </Pressable>
 );
 
+const checkboxSize = 20;
 const styles = StyleSheet.create({
   container: {
     marginVertical: AppTheme.spacing.s,
@@ -24,19 +25,19 @@ const styles = StyleSheet.create({
   checkbox: {
     borderWidth: 1.2,
     borderRadius: 3,
-    height: 20,
-    width: 20,
-    backgroundColor: AppTheme.colors.WHITE,
+    height: checkboxSize,
+    width: checkboxSize,
+    backgroundColor: AppTheme.colors.TRANSPARENT,
     borderColor: AppTheme.colors.PALE_TEAL,
   },
   checkboxChecked: {
     borderRadius: 3,
-    height: 20,
-    width: 20,
+    height: checkboxSize,
+    width: checkboxSize,
     backgroundColor: AppTheme.colors.PALE_TEAL,
   },
   checkedImage: {
-    width: 20,
-    height: 20,
+    width: checkboxSize,
+    height: checkboxSize,
   },
 });

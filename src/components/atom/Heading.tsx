@@ -17,7 +17,6 @@ export const Heading: React.FC<IHeading> = ({text, testID}) => (
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
     alignSelf: 'center',
   },
   text: {

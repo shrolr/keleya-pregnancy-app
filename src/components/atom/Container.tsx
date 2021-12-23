@@ -1,8 +1,11 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleProp, StyleSheet, View, ViewStyle} from 'react-native';
+interface IContainer {
+  style?: StyleProp<ViewStyle>;
+}
 
-export const Container: React.FC = ({children}) => (
-  <View style={styles.container}>{children}</View>
+export const Container: React.FC<IContainer> = ({children, style}) => (
+  <View style={[styles.container, style]}>{children}</View>
 );
 
 const styles = StyleSheet.create({
