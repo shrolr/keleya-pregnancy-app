@@ -26,4 +26,10 @@ describe('Signup Screen Test', () => {
   it('should have privacy policy checkbox', async () => {
     await expect(element(by.id('privacyPolicyCheckbox'))).toBeVisible();
   });
+  it('should have terms & conditions checkbox', async () => {
+    await expect(element(by.id('termsAndConditionsCheckbox'))).toBeVisible();
+  });
+  it('should have create account button', async () => {
+    await expect(element(by.id('createAccountButton'))).toBeVisible();
+  });
 });
