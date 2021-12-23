@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  Dimensions,
-  GestureResponderEvent,
-  Pressable,
-  StyleSheet,
-  Text,
-} from 'react-native';
+import {GestureResponderEvent, Pressable, StyleSheet, Text} from 'react-native';
 import {AppTheme} from '~constants';
 
 interface IButtonStyled {
@@ -36,7 +30,7 @@ const containerStyles = StyleSheet.create({
   solid: {
     marginVertical: AppTheme.spacing.xs,
     borderRadius: 6,
-    width: Dimensions.get('screen').width * 0.8,
+    width: '100%',
     alignSelf: 'center',
     paddingVertical: AppTheme.spacing.s,
     justifyContent: 'center',

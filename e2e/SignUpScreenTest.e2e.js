@@ -18,7 +18,12 @@ describe('Signup Screen Test', () => {
     await expect(element(by.id('getStartedTitle'))).toBeVisible();
   });
   it('should have email input', async () => {
-    await expect(element(by.id('getStartedTitle'))).toBeVisible();
-    await element(by.id('emailInput')).typeText('123456');
+    await expect(element(by.id('emailInput'))).toBeVisible();
+  });
+  it('should have password input', async () => {
+    await expect(element(by.id('passwordInput'))).toBeVisible();
+  });
+  it('should have privacy policy checkbox', async () => {
+    await expect(element(by.id('privacyPolicyCheckbox'))).toBeVisible();
   });
 });

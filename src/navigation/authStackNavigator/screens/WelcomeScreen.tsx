@@ -1,6 +1,6 @@
 import React from 'react';
 import {Dimensions, ImageBackground, StyleSheet, View} from 'react-native';
-import {ButtonStyled, Dots, KeleyeBanner} from '~components/atom';
+import {ButtonStyled, Container, Dots, KeleyeBanner} from '~components/atom';
 import {AppTheme} from '~constants';
 import {AuthNavProps} from '../AuthParamList';
 
@@ -19,14 +19,16 @@ export default function WelcomeScreen({
         style={styles.initalBg}>
         <KeleyeBanner />
       </ImageBackground>
-      <ButtonStyled
-        onPress={onGetStartedButtonPress}
-        variant="solid"
-        text="Get started"
-        testID="getStartedButton"
-      />
-      <ButtonStyled variant="outlined" text="Or login" testID="loginButton" />
-      <Dots />
+      <Container>
+        <ButtonStyled
+          onPress={onGetStartedButtonPress}
+          variant="solid"
+          text="Get started"
+          testID="getStartedButton"
+        />
+        <ButtonStyled variant="outlined" text="Or login" testID="loginButton" />
+        <Dots />
+      </Container>
     </View>
   );
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Dimensions, StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import {AppTheme} from '~constants';
 
 interface IHeading {
@@ -17,7 +17,7 @@ export const Heading: React.FC<IHeading> = ({text, testID}) => (
 
 const styles = StyleSheet.create({
   container: {
-    width: Dimensions.get('screen').width * 0.7,
+    width: '100%',
     alignSelf: 'center',
   },
   text: {
