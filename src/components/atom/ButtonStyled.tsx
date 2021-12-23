@@ -1,5 +1,5 @@
 import React from 'react';
-import {GestureResponderEvent, Pressable, StyleSheet, Text} from 'react-native';
+import {Pressable, StyleSheet, Text} from 'react-native';
 import {AppTheme} from '~constants';
 
 interface IButtonStyled {
@@ -7,7 +7,7 @@ interface IButtonStyled {
   testID: string;
   variant: 'outlined' | 'solid';
   disabled?: boolean;
-  onPress?: ((event: GestureResponderEvent) => void) | null | undefined;
+  onPress?: () => void;
 }
 
 export const ButtonStyled: React.FC<IButtonStyled> = ({
