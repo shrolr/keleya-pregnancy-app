@@ -11,7 +11,7 @@ export const Dots: React.FC = () => {
     </View>
   );
 };
-
+const dotSize = 10;
 const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
@@ -22,16 +22,16 @@ const styles = StyleSheet.create({
   },
   dotStyle: {
     backgroundColor: AppTheme.colors.LIGHT_TEAL,
-    height: 10,
+    height: dotSize,
     marginHorizontal: AppTheme.spacing.xs,
-    width: 10,
-    borderRadius: 5,
+    width: dotSize,
+    borderRadius: dotSize / 2,
   },
   dotStyleActive: {
     backgroundColor: AppTheme.colors.PALE_TEAL,
-    height: 10,
+    height: dotSize,
     marginHorizontal: AppTheme.spacing.xs,
-    width: 10,
-    borderRadius: 5,
+    width: dotSize,
+    borderRadius: dotSize / 2,
   },
 });

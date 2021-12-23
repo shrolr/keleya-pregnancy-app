@@ -1,26 +1,39 @@
 import React from 'react';
-import {Dimensions, StyleSheet, Text, View} from 'react-native';
+import {Pressable, StyleSheet, Text} from 'react-native';
 import {AppTheme} from '~constants';
 
 interface IButtonStyled {
   text: string;
   testID: string;
   variant: 'outlined' | 'solid';
+  disabled?: boolean;
+  onPress?: () => void;
 }
 
 export const ButtonStyled: React.FC<IButtonStyled> = ({
   text,
   variant,
   testID,
-}) => {
-  return (
-    <View testID={testID} style={containerStyles[variant]}>
-      <Text style={textStyles[variant]}>{text}</Text>
-    </View>
-  );
-};
+  onPress,
+  disabled,
+}) => (
+  <Pressable
+    disabled={disabled}
+    onPress={onPress}
+    testID={testID}
+    style={
+      disabled
+        ? [containerStyles[variant], containerStyles.disabled]
+        : containerStyles[variant]
+    }>
+    <Text style={textStyles[variant]}>{text}</Text>
+  </Pressable>
+);
 
 const containerStyles = StyleSheet.create({
+  disabled: {
+    backgroundColor: AppTheme.colors.WARM_GREY,
+  },
   outlined: {
     marginVertical: AppTheme.spacing.xs,
     paddingVertical: AppTheme.spacing.xs,
@@ -30,7 +43,7 @@ const containerStyles = StyleSheet.create({
   solid: {
     marginVertical: AppTheme.spacing.xs,
     borderRadius: 6,
-    width: Dimensions.get('screen').width * 0.8,
+    width: '100%',
     alignSelf: 'center',
     paddingVertical: AppTheme.spacing.s,
     justifyContent: 'center',

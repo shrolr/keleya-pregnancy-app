@@ -1,10 +1,12 @@
 const palette = {
   WHITE: '#ffffff',
+  TRANSPARENT: 'transparent',
   PALE_TEAL: '#69c0ba',
   LIGHT_TEAL: '#9adcd7',
   GREYISH_BROWN: '#4a4a4a',
   WARM_GREY: '#9b9b9b',
   BUBBLE_GUM: '#e97db5',
+  DANGER: '#e74c3c',
 };
 
 export const AppTheme = {
@@ -21,9 +23,15 @@ export const AppTheme = {
       fontSize: 18,
       letterSpacing: 0.5,
     },
+    body: {
+      fontSize: 14,
+    },
     button: {
       fontSize: 16,
       letterSpacing: 0.7,
+    },
+    info: {
+      fontSize: 12,
     },
   },
 };
