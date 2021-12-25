@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {Dispatch, useEffect, useState} from 'react';
 import {
   Dimensions,
   Image,
@@ -20,13 +20,20 @@ import {
   SecureTextEntryIcon,
 } from '~components/atom';
 import {AppTheme} from '~constants';
+import {UserAction} from '~redux/actionTypes';
 import {EmailValidator} from '~utils';
 import {AuthNavProps} from '../AuthParamList';
+import {useDispatch, useSelector} from 'react-redux';
+import {RedusxAppState} from '~redux/reducers';
 
 const backgroundImage = require('src/assets/keleya-challenge-assets/authentication-background-image.jpg');
 export default function SignUpScreen({
   navigation,
 }: AuthNavProps<'SignUpScreen'>) {
+  const dispatch = useDispatch<Dispatch<UserAction>>();
+  const {user, isRegistrationInProgress} = useSelector(
+    (state: RedusxAppState) => state.user,
+  );
   const [createAccountButtonEnabled, setcreateAccountButtonEnabled] =
     useState(true);
   const [email, setemail] = useState('');
@@ -66,13 +73,17 @@ export default function SignUpScreen({
   const onArrowBackButtonPressed = () => {
     navigation.goBack();
   };
+  const onCreateAccountPressed = () => {
+    dispatch({type: 'REGISTER', registerRequest: {email, password}});
+  };
   useEffect(() => {
     setcreateAccountButtonEnabled(
       privacyPolicyCheckboxChecked &&
         termsAndConditionsCheckboxChecked &&
         email.length > 0 &&
         !emailInputError &&
-        password.length > 0,
+        password.length > 0 &&
+        !isRegistrationInProgress,
     );
   }, [
     privacyPolicyCheckboxChecked,
@@ -80,8 +91,13 @@ export default function SignUpScreen({
     emailInputError,
     password,
     email,
+    isRegistrationInProgress,
   ]);
-
+  useEffect(() => {
+    if (user) {
+      navigation.navigate('NameScreen');
+    }
+  }, [navigation, user]);
   return (
     <KeyboardAvoidingView
       enabled={false}
@@ -153,6 +169,7 @@ export default function SignUpScreen({
             </View>
             <View style={styles.createAccountContainer}>
               <ButtonStyled
+                onPress={onCreateAccountPressed}
                 testID="createAccountButton"
                 variant="solid"
                 text="Create Account"

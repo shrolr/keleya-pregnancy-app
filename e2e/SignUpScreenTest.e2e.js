@@ -40,4 +40,13 @@ describe('Signup Screen Test', () => {
     await element(by.id('createAccountButton')).tap();
     await expect(element(by.id('nameScreen'))).toBeVisible();
   });
+  it('should have disabled continue button', async () => {
+    await element(by.id('continueAccountButton')).tap();
+    await expect(element(by.id('continueAccountButton'))).toBeVisible();
+  });
+  it('should navigate to date screen after name input filled', async () => {
+    await element(by.id('nameInput')).typeText('Elena');
+    await element(by.id('continueAccountButton')).tap();
+    await expect(element(by.id('continueAccountButton'))).not.toBeVisible();
+  });
 });

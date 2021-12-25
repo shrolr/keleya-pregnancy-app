@@ -9,7 +9,7 @@ interface IHeading {
 
 export const Heading: React.FC<IHeading> = ({text, testID}) => (
   <View testID={testID} style={styles.container}>
-    <Text ellipsizeMode="tail" numberOfLines={2} style={styles.text}>
+    <Text ellipsizeMode="tail" numberOfLines={0} style={styles.text}>
       {text}
     </Text>
   </View>
