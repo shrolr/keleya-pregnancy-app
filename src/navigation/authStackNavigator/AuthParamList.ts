@@ -4,6 +4,7 @@ import {StackNavigationProp} from '@react-navigation/stack';
 export type AuthParamList = {
   WelcomeScreen: undefined;
   SignUpScreen: undefined;
+  NameScreen: undefined;
 };
 
 export type AuthNavProps<T extends keyof AuthParamList> = {
