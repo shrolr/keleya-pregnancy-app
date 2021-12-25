@@ -32,4 +32,12 @@ describe('Signup Screen Test', () => {
   it('should have create account button', async () => {
     await expect(element(by.id('createAccountButton'))).toBeVisible();
   });
+  it('should navigate to name screen', async () => {
+    await element(by.id('emailInput')).typeText('example@gmail.com');
+    await element(by.id('passwordInput')).typeText('secretpassword');
+    await element(by.id('privacyPolicyCheckbox')).tap();
+    await element(by.id('termsAndConditionsCheckbox')).tap();
+    await element(by.id('createAccountButton')).tap();
+    await expect(element(by.id('nameScreen'))).toBeVisible();
+  });
 });
