@@ -38,15 +38,36 @@ describe('Signup Screen Test', () => {
     await element(by.id('privacyPolicyCheckbox')).tap();
     await element(by.id('termsAndConditionsCheckbox')).tap();
     await element(by.id('createAccountButton')).tap();
-    await expect(element(by.id('nameScreen'))).toBeVisible();
+    await expect(element(by.id('nameScreenHeaderImage'))).toBeVisible();
   });
+  // Name Screen
   it('should have disabled continue button', async () => {
-    await element(by.id('continueAccountButton')).tap();
-    await expect(element(by.id('continueAccountButton'))).toBeVisible();
+    await element(by.id('continueButton')).tap();
+    await expect(element(by.id('continueButton'))).toBeVisible();
   });
   it('should navigate to date screen after name input filled', async () => {
     await element(by.id('nameInput')).typeText('Elena');
-    await element(by.id('continueAccountButton')).tap();
-    await expect(element(by.id('continueAccountButton'))).not.toBeVisible();
+    await element(by.id('keyboardDismisser')).tap();
+    await element(by.id('continueButton')).tap();
+    await expect(element(by.id('nameInput'))).not.toBeVisible();
+  });
+  // Due Date Screen
+  it('should have disabled continue button if user did not select an date', async () => {
+    await element(by.id('continueButton')).tap();
+    await expect(element(by.id('dateScreen'))).toBeVisible();
+  });
+  it('should navigate to workout screen', async () => {
+    await element(by.id('datePickerLabel')).tap();
+    const picker = element(
+      by
+        .type('android.widget.ScrollView')
+        .withAncestor(by.type('android.widget.DatePicker')),
+    );
+    await picker.swipe('left', 'fast', 1);
+    await picker.tapAtPoint({x: 50, y: 200});
+    const okButton = element(by.text('OK'));
+    await okButton.tap();
+    await element(by.id('continueButton')).tap();
+    await expect(element(by.id('workoutScreen'))).toBeVisible();
   });
 });

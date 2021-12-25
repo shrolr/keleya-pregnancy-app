@@ -31,7 +31,7 @@ export default function SignUpScreen({
   navigation,
 }: AuthNavProps<'SignUpScreen'>) {
   const dispatch = useDispatch<Dispatch<UserAction>>();
-  const {user, isRegistrationInProgress} = useSelector(
+  const {isAuthenticated, isRegistrationInProgress} = useSelector(
     (state: RedusxAppState) => state.user,
   );
   const [createAccountButtonEnabled, setcreateAccountButtonEnabled] =
@@ -94,10 +94,10 @@ export default function SignUpScreen({
     isRegistrationInProgress,
   ]);
   useEffect(() => {
-    if (user) {
+    if (isAuthenticated) {
       navigation.navigate('NameScreen');
     }
-  }, [navigation, user]);
+  }, [navigation, isAuthenticated]);
   return (
     <KeyboardAvoidingView
       enabled={false}
@@ -118,6 +118,7 @@ export default function SignUpScreen({
               text="Add your details below to set up an account"
             />
             <Input
+              autoCapitalize="none"
               keyboardType="email-address"
               testID="emailInput"
               placeholder="example@gmail.com"

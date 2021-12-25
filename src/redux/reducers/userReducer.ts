@@ -26,6 +26,12 @@ export default function userReducer(
       return {
         ...state,
         isRegistrationInProgress: false,
+        isAuthenticated: true,
+        user: action.user,
+      };
+    case actions.UPDATE_USER_INFO:
+      return {
+        ...state,
         user: action.user,
       };
     default:

@@ -2,6 +2,7 @@ const palette = {
   WHITE: '#ffffff',
   TRANSPARENT: 'transparent',
   PALE_TEAL: '#69c0ba',
+  LIGHT_GRAY: '#eeeeef',
   LIGHT_TEAL: '#9adcd7',
   GREYISH_BROWN: '#4a4a4a',
   WARM_GREY: '#9b9b9b',
@@ -33,5 +34,8 @@ export const AppTheme = {
     info: {
       fontSize: 12,
     },
+  },
+  timeFormats: {
+    localeTimeFormat: 'MMM DD, YYYY',
   },
 };

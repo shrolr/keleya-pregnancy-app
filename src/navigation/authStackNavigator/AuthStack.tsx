@@ -4,6 +4,7 @@ import WelcomeScreen from './screens/WelcomeScreen';
 import {createStackNavigator} from '@react-navigation/stack';
 import SignUpScreen from './screens/SignupScreen';
 import NameScreen from './screens/NameScreen';
+import DateScreen from './screens/DateScreen';
 
 interface AuthStackProps {}
 
@@ -19,6 +20,7 @@ export const AuthStack: React.FC<AuthStackProps> = ({}) => {
       <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
       <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
       <Stack.Screen name="NameScreen" component={NameScreen} />
+      <Stack.Screen name="DateScreen" component={DateScreen} />
     </Stack.Navigator>
   );
 };

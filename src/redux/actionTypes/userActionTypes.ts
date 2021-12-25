@@ -1,4 +1,4 @@
-import {RegisterModal} from '~modals';
+import {RegisterModal, UserModal} from '~modals';
 
 export const REGISTER = 'REGISTER';
 export interface RegisterAction {
@@ -12,4 +12,13 @@ export interface RegisterSuccessAction {
   user: RegisterModal;
 }
 
-export type UserAction = RegisterAction | RegisterSuccessAction;
+export const UPDATE_USER_INFO = 'UPDATE_USER_INFO';
+export interface UpdateUserInfoAction {
+  type: typeof UPDATE_USER_INFO;
+  user: UserModal;
+}
+
+export type UserAction =
+  | RegisterAction
+  | RegisterSuccessAction
+  | UpdateUserInfoAction;
