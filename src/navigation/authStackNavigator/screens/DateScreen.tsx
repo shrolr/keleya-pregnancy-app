@@ -44,9 +44,12 @@ export default function DateScreen({navigation}: AuthNavProps<'DateScreen'>) {
     navigation.goBack();
   };
   const onContinueButtonPressed = () => {
-    if (user) {
-      dispatch({type: 'UPDATE_USER_INFO', user: {...user}});
-      navigation.navigate('DateScreen');
+    if (user && selectedDate) {
+      dispatch({
+        type: 'UPDATE_USER_INFO',
+        user: {...user, dueDate: selectedDate},
+      });
+      navigation.navigate('WorkoutScreen');
     }
   };
   const onShowDatePickerPressed = () => {
