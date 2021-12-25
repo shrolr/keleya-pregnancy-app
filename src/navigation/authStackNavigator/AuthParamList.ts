@@ -5,6 +5,7 @@ export type AuthParamList = {
   WelcomeScreen: undefined;
   SignUpScreen: undefined;
   NameScreen: undefined;
+  DateScreen: undefined;
 };
 
 export type AuthNavProps<T extends keyof AuthParamList> = {

@@ -7,6 +7,7 @@ import {
   Platform,
   StyleSheet,
   TouchableWithoutFeedback,
+  UIManager,
   View,
 } from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
@@ -15,63 +16,89 @@ import {
   ArrowBackButton,
   ButtonStyled,
   Container,
+  DatePickerLabel,
   Heading,
-  Input,
 } from '~components/atom';
 import {AppTheme} from '~constants';
 import {UserAction} from '~redux/actionTypes';
 import {RedusxAppState} from '~redux/reducers';
 import {AuthNavProps} from '../AuthParamList';
+import dayjs from 'dayjs';
+import RNDateTimePicker from '@react-native-community/datetimepicker';
 
-const headerImage = require('../../../assets/keleya-modified-assets/couch_smile_modified.png');
-export default function NameScreen({navigation}: AuthNavProps<'NameScreen'>) {
+if (Platform.OS === 'android') {
+  if (UIManager.setLayoutAnimationEnabledExperimental) {
+    UIManager.setLayoutAnimationEnabledExperimental(true);
+  }
+}
+const headerImage = require('../../../assets/keleya-challenge-assets/due-date-background-image.jpg');
+export default function DateScreen({navigation}: AuthNavProps<'DateScreen'>) {
   const dispatch = useDispatch<Dispatch<UserAction>>();
-  const [name, setname] = useState('');
   const {user} = useSelector((state: RedusxAppState) => state.user);
-  const onChangeName = (nameText: string) => {
-    setname(nameText);
-  };
+  const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
+  const [selectedDateWithFormat, setselectedDateWithFormat] = useState(
+    'Click here to select a date',
+  );
+  const [isDatePickerVisible, setisDatePickerVisible] = useState(false);
   const onArrowBackButtonPressed = () => {
     navigation.goBack();
   };
   const onContinueButtonPressed = () => {
     if (user) {
-      dispatch({type: 'UPDATE_USER_INFO', user: {...user, name}});
+      dispatch({type: 'UPDATE_USER_INFO', user: {...user}});
       navigation.navigate('DateScreen');
     }
+  };
+  const onShowDatePickerPressed = () => {
+    setisDatePickerVisible(true);
+  };
+
+  const onChange = (_: Event, _selectedDate?: Date) => {
+    setisDatePickerVisible(false);
+
+    setSelectedDate(_selectedDate);
+
+    setselectedDateWithFormat(
+      dayjs(_selectedDate).format(AppTheme.timeFormats.localeTimeFormat),
+    );
   };
 
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={styles.keyboardWrapper}>
-      <TouchableWithoutFeedback
-        testID="keyboardDismisser"
-        onPress={Keyboard.dismiss}>
-        <View style={styles.wrapper}>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View testID="dateScreen" style={styles.wrapper}>
           <ArrowBackButton onPress={onArrowBackButtonPressed} />
           <Image
-            testID="nameScreenHeaderImage"
-            resizeMode="stretch"
+            resizeMode="cover"
             source={headerImage}
             style={styles.headerImage}
           />
+          {isDatePickerVisible && (
+            <RNDateTimePicker
+              testID="dateTimePicker"
+              value={selectedDate ? selectedDate : new Date()}
+              mode={'date'}
+              display="default"
+              onChange={onChange}
+            />
+          )}
           <Container style={styles.container}>
-            <Heading text="It`s great that you`re here! First things first, what should we call you?" />
-            <Input
-              testID="nameInput"
-              autoCapitalize="sentences"
-              placeholder="Your Name"
-              onChangeText={onChangeName}
+            <Heading text={`When is your baby due, ${user?.name}?`} />
+            <DatePickerLabel
+              testID="datePickerLabel"
+              onPress={onShowDatePickerPressed}
+              text={selectedDateWithFormat}
             />
 
             <View style={styles.buttonContainer}>
               <ButtonStyled
                 onPress={onContinueButtonPressed}
+                disabled={selectedDate === undefined ? true : false}
                 testID="continueButton"
                 variant="solid"
                 text="Continue"
-                disabled={!(name.length > 0)}
               />
             </View>
           </Container>

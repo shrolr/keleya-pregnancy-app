@@ -7,3 +7,4 @@ export * from './Checkbox';
 export * from './Container';
 export * from './SecureTextEntryIcon';
 export * from './ArrowBackButton';
+export * from './DatePickerLabel';
