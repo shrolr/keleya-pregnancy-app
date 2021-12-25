@@ -42,9 +42,11 @@ export default function SignUpScreen({
     settermsAndConditionsCheckboxChecked,
   ] = useState(false);
   const onPrivacyPolicyCheckboxChanged = () => {
+    Keyboard.dismiss();
     setprivacyPolicyCheckboxChecked(!privacyPolicyCheckboxChecked);
   };
   const onTermsAndConditionsCheckboxChanged = () => {
+    Keyboard.dismiss();
     settermsAndConditionsCheckboxChecked(!termsAndConditionsCheckboxChecked);
   };
   const onSecureTextEntryChanged = () => {
