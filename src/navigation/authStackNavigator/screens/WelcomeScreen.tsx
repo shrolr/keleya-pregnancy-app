@@ -11,6 +11,9 @@ export default function WelcomeScreen({
   const onGetStartedButtonPress = () => {
     navigation.navigate('SignUpScreen');
   };
+  const onLoginButtonPress = () => {
+    navigation.navigate('SignInScreen');
+  };
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -26,7 +29,12 @@ export default function WelcomeScreen({
           text="Get started"
           testID="getStartedButton"
         />
-        <ButtonStyled variant="outlined" text="Or login" testID="loginButton" />
+        <ButtonStyled
+          onPress={onLoginButtonPress}
+          variant="outlined"
+          text="Or login"
+          testID="loginButton"
+        />
         <Dots />
       </Container>
     </View>
