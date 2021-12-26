@@ -31,7 +31,7 @@ export default function WorkoutScreen({
         type: 'UPDATE_USER_INFO',
         user: {...user, TimesAWeek: TimesAWeek},
       });
-      //navigation.navigate('SuccessScreen');
+      navigation.navigate('SuccessScreen');
     }
   };
   const onTimeSelected = (itemValue: string) => {
