@@ -8,6 +8,7 @@ export type AuthParamList = {
   DateScreen: undefined;
   WorkoutScreen: undefined;
   SuccessScreen: undefined;
+  SignInScreen: undefined;
 };
 
 export type AuthNavProps<T extends keyof AuthParamList> = {

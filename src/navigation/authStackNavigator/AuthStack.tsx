@@ -7,6 +7,7 @@ import NameScreen from './screens/NameScreen';
 import DateScreen from './screens/DateScreen';
 import WorkoutScreen from './screens/WorukoutScreen';
 import SuccessScreen from './screens/SuccessScreen';
+import SignInScreen from './screens/SignInScreen';
 
 interface AuthStackProps {}
 
@@ -25,6 +26,7 @@ export const AuthStack: React.FC<AuthStackProps> = ({}) => {
       <Stack.Screen name="DateScreen" component={DateScreen} />
       <Stack.Screen name="WorkoutScreen" component={WorkoutScreen} />
       <Stack.Screen name="SuccessScreen" component={SuccessScreen} />
+      <Stack.Screen name="SignInScreen" component={SignInScreen} />
     </Stack.Navigator>
   );
 };

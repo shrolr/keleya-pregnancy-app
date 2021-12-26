@@ -56,6 +56,8 @@ const textStyles = StyleSheet.create({
     color: AppTheme.colors.GREYISH_BROWN,
     textAlign: 'center',
     fontWeight: '300',
+    paddingVertical: AppTheme.spacing.s,
+    paddingHorizontal: AppTheme.spacing.s,
     ...AppTheme.textVariants.body,
   },
   solid: {
