@@ -4,7 +4,7 @@ import {AppTheme} from '~constants';
 
 interface IButtonStyled {
   text: string;
-  testID: string;
+  testID?: string;
   variant: 'outlined' | 'solid';
   disabled?: boolean;
   onPress?: () => void;
@@ -55,8 +55,8 @@ const textStyles = StyleSheet.create({
   outlined: {
     color: AppTheme.colors.GREYISH_BROWN,
     textAlign: 'center',
-    fontWeight: '700',
-    ...AppTheme.textVariants.header,
+    fontWeight: '300',
+    ...AppTheme.textVariants.body,
   },
   solid: {
     fontWeight: '700',
