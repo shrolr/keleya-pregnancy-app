@@ -1,14 +1,11 @@
 /* eslint-env detox/detox, jest */
 
-describe('Signup Screen Test', () => {
+describe('Signup Test', () => {
   beforeAll(async () => {
     await device.launchApp();
   });
-  afterAll(async () => {
-    await device.takeScreenshot('Sign up Screen');
-  });
-
   it('should have Header Image', async () => {
+    await device.takeScreenshot('Initial Screen');
     await element(by.id('getStartedButton')).tap();
     await waitFor(element(by.id('headerImage')))
       .toBeVisible()
@@ -29,30 +26,34 @@ describe('Signup Screen Test', () => {
   it('should have terms & conditions checkbox', async () => {
     await expect(element(by.id('termsAndConditionsCheckbox'))).toBeVisible();
   });
-  it('should have create account button', async () => {
+  it('should have disabled create account button', async () => {
     await expect(element(by.id('createAccountButton'))).toBeVisible();
+    await device.takeScreenshot('Sign up Screen');
   });
   it('should navigate to name screen', async () => {
     await element(by.id('emailInput')).typeText('example@gmail.com');
-    await element(by.id('passwordInput')).typeText('secretpassword');
+    await element(by.id('passwordInput')).typeText('secretpassword\n');
     await element(by.id('privacyPolicyCheckbox')).tap();
     await element(by.id('termsAndConditionsCheckbox')).tap();
+    await device.takeScreenshot('Sign up Screen after all fields entered');
     await element(by.id('createAccountButton')).tap();
     await expect(element(by.id('nameScreenHeaderImage'))).toBeVisible();
   });
   // Name Screen
   it('should have disabled continue button', async () => {
     await element(by.id('continueButton')).tap();
-    await expect(element(by.id('continueButton'))).toBeVisible();
+    await expect(element(by.id('nameScreenHeaderImage'))).toBeVisible();
+    await device.takeScreenshot('Name screen disabled continue button');
   });
   it('should navigate to date screen after name input filled', async () => {
-    await element(by.id('nameInput')).typeText('Elena');
-    await element(by.id('keyboardDismisser')).tap();
+    await element(by.id('nameInput')).typeText('Elena\n');
+    await device.takeScreenshot('Name screen enabled continue button');
     await element(by.id('continueButton')).tap();
     await expect(element(by.id('nameInput'))).not.toBeVisible();
   });
   // Due Date Screen
   it('should have disabled continue button if user did not select an date', async () => {
+    await device.takeScreenshot('Date screen disabled continue button');
     await element(by.id('continueButton')).tap();
     await expect(element(by.id('dateScreen'))).toBeVisible();
   });
@@ -67,11 +68,14 @@ describe('Signup Screen Test', () => {
     await picker.tapAtPoint({x: 50, y: 200});
     const okButton = element(by.text('OK'));
     await okButton.tap();
+    await device.takeScreenshot('Date screen enabled continue button');
     await element(by.id('continueButton')).tap();
     await expect(element(by.id('workoutScreen'))).toBeVisible();
   });
   it('should navigate to success screen ', async () => {
+    await device.takeScreenshot('Workout screen enabled continue button');
     await element(by.id('continueButton')).tap();
     await expect(element(by.id('successScreen'))).toBeVisible();
+    await device.takeScreenshot('Success screen enabled continue button');
   });
 });

@@ -1,13 +1,17 @@
 import React from 'react';
+import {useTranslation} from 'react-i18next';
 import {Dimensions, ImageBackground, StyleSheet, View} from 'react-native';
 import {ButtonStyled, Container, Dots, KeleyeBanner} from '~components/atom';
 import {AppTheme} from '~constants';
 import {AuthNavProps} from '../AuthParamList';
 
+const backgroundImage = require('src/assets/keleya-challenge-assets/first-intro-image.png');
+
 export default function WelcomeScreen({
   navigation,
 }: AuthNavProps<'WelcomeScreen'>) {
-  const backgroundImage = require('src/assets/keleya-challenge-assets/first-intro-image.png');
+  const {t} = useTranslation();
+
   const onGetStartedButtonPress = () => {
     navigation.navigate('SignUpScreen');
   };
@@ -26,13 +30,13 @@ export default function WelcomeScreen({
         <ButtonStyled
           onPress={onGetStartedButtonPress}
           variant="solid"
-          text="Get started"
+          text={t('welcomeScreen:GETSTARTEDBUTTON')}
           testID="getStartedButton"
         />
         <ButtonStyled
           onPress={onLoginButtonPress}
           variant="outlined"
-          text="Or login"
+          text={t('welcomeScreen:ORLOGINBUTTON')}
           testID="loginButton"
         />
         <Dots />

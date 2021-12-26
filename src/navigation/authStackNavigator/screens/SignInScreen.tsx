@@ -69,7 +69,7 @@ export default function SignInScreen({
           <ArrowBackButton onPress={onArrowBackButtonPressed} />
           <Image
             resizeMode="cover"
-            testID="headerImage"
+            testID="signInHeaderImage"
             source={backgroundImage}
             style={styles.headerImage}
           />
