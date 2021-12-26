@@ -70,4 +70,8 @@ describe('Signup Screen Test', () => {
     await element(by.id('continueButton')).tap();
     await expect(element(by.id('workoutScreen'))).toBeVisible();
   });
+  it('should navigate to success screen ', async () => {
+    await element(by.id('continueButton')).tap();
+    await expect(element(by.id('successScreen'))).toBeVisible();
+  });
 });
