@@ -4,6 +4,9 @@
 
 yarn
 yarn android
+cd ios 
+pod install
+cd ..
 yarn ios
 
 #E2E
